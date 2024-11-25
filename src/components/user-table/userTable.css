@@ -1,0 +1,90 @@
+#user-table-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100%;
+    /* padding: 1rem 1rem; */
+}
+
+
+#user-table {
+  max-width: 50rem;
+  /* margin: 2rem auto; */
+  padding: 1rem;
+  border-collapse: collapse;
+
+  /* border-spacing: 1.2rem; */
+  text-align: right;
+}
+
+#user-table thead tr th{
+  font-size: 0.9rem;
+  color: #83e6c0;
+  border-bottom: 2px solid;
+}
+
+#user-table tbody tr td{
+  border-bottom: 1px solid;
+
+}
+
+#user-table thead tr th,
+#user-table tbody tr td{
+  padding:0.55rem;
+  text-align: start;
+}
+
+
+
+
+#user-table tbody {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 0.85rem;
+  color: #c2e9e0;
+}
+
+#user-table tr button i,
+#user-table tr button
+{
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+#user-table tr button i.delete-btn{
+  color: red;
+}
+#user-table tr button i.edit-btn{
+  color: rgb(215, 215, 11);
+}
+#user-table tr div{
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-header{
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  width: 100%;
+}
+
+.add-user-data-btn{
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+  border: #00a67a;
+  outline:none;
+
+  transition: all 0.5s ease;
+}
+.add-user-data-btn:active{
+  scale: 0.7;
+}
+
+
+
+
