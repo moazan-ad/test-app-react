@@ -21,12 +21,13 @@ function App() {
     <main>
       
       {
-        toggleComponents === "user-form" && <UserForm handleToggleComponents={handleToggleComponents}
-          addToUserList={addToUserList} />
-      }
-      {
-        toggleComponents === "user-table" && <UserTable handleToggleComponents={handleToggleComponents}
-          userList={userList} />
+        toggleComponents === "user-form" ? 
+        <UserForm handleToggleComponents={handleToggleComponents} 
+        addToUserList={addToUserList} /> :
+         toggleComponents === "user-table" ? 
+         <UserTable handleToggleComponents={handleToggleComponents}
+            userList={userList} /> : 
+            null
       }
 
     </main>
