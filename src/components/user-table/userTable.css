@@ -1,7 +1,7 @@
 #user-table-section{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding-top:4rem;
     align-items: center;
     min-height: 100vh;
     min-width: 100%;
@@ -17,7 +17,7 @@
 }
 
 #user-table thead tr th{
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: #83e6c0;
   border-bottom: 2px solid;
 }
@@ -38,9 +38,14 @@
 
 #user-table tbody {
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #c2e9e0;
 }
+
+#user-table tr button:hover i{
+  scale: 1.2;
+  transition: all 0.3s ease;
+} 
 
 #user-table tr button i,
 #user-table tr button
@@ -48,6 +53,7 @@
   background-color: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 #user-table tr button i.delete-btn{

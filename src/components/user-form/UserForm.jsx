@@ -3,13 +3,26 @@ import './userForm.css'
 import Input from '../ui/Input'
 import { useState } from 'react';
 
-const UserForm = ({ addToUserList, handleToggleComponents }) => {
+const UserForm = ({
+    user,
+    setUser,
+    setUserList,
+    handleToggleComponents,
+    addToUserList,
+    isEditing,
+    setIsEditing
+
+    }) => {
     
-    
-    const [user, setUser] = useState({
-        name: '',
-        age: ''
-    });
+        
+    const editUserList = (user) => {
+        setUserList(prev => {
+            const { name, age, index } = user;
+            const tempUserList = [...prev];
+            tempUserList[index] = { name, age };
+            return tempUserList;
+        })
+    }
 
     const [error,setError] = useState({
         set: false,
@@ -25,10 +38,19 @@ const UserForm = ({ addToUserList, handleToggleComponents }) => {
     const handleOnSubmit = (e) => {
         e.preventDefault();
         if(user.name.length > 0 && user.age > 0){
-            addToUserList({user});
+            if (isEditing) editUserList(user);
+            else addToUserList({user});
+            setUser({ name: '', age: '', id: '' });
+            handleToggleComponents('user-table');
             return;
         }
-        setError({set:true,message: "'Name' and 'Age' can not be empty."})
+        setError({set:true,message: "'Name' and 'Age' should be valid value."})
+    }
+
+    const handleToggle = () => {
+        setUser({ name: '', age: '', id: '' });
+        setIsEditing(false);
+        handleToggleComponents('user-table');
     }
 
     return(
@@ -48,15 +70,16 @@ const UserForm = ({ addToUserList, handleToggleComponents }) => {
                         <div className='btn-group'>
                             {/* button to scroll to table section */}
                             <button className='btn secondary-btn'
-                                onClick={() => handleToggleComponents('user-table')}>
+                                onClick={handleToggle}>
                                 User Table
                             </button>
                             <button type='submit' className='btn primary-btn'>
-                                Add
+                                {
+                                    isEditing ? "Update" : "Add"
+                                }
                             </button>
                         </div>
                         {
-                            // show error, in case, it is set
                             error.set && 
                                 <div className='error'>
                                     {error.message}
@@ -70,6 +93,4 @@ const UserForm = ({ addToUserList, handleToggleComponents }) => {
     );
 
 }
-
-
 export default UserForm;

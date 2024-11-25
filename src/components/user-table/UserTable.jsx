@@ -2,13 +2,31 @@
 
 import './userTable.css'
 
-const UserTable = ({ userList, handleToggleComponents }) => {
-    
+const UserTable = ({ 
+    userList,
+    handleToggleComponents,
+    setUser,
+    deleteFromUserList,
+    setIsEditing
+ }) => {
+
+    const handleEditToggle = (user,index) => {
+        setUser({...user,index: index});
+        setIsEditing(true);
+        handleToggleComponents('user-form'); 
+    }
+
+    const handleToggle = () => {
+        setUser({name: '',age:'',id:''});
+        setIsEditing(false);
+        handleToggleComponents('user-form');
+    }
 
     return(
         <section id="user-table-section">
             <div className='table-header'>
-                <button className='primary-btn add-user-data-btn' onClick={() => handleToggleComponents('user-form')}>
+                <button className='primary-btn add-user-data-btn' 
+                onClick={handleToggle}>
                     Add Data
                 </button>
             </div>
@@ -29,11 +47,12 @@ const UserTable = ({ userList, handleToggleComponents }) => {
                                 <td>{user.age}</td>
                                 <td>
                                     <div className='action-btns'>
-                                        <button>
-                                            <i className="fa-solid fa-pen-to-square delete-btn"></i>
+                                        <button onClick={() => handleEditToggle(user, index)}>
+                                            <i className="fa-solid fa-pen-to-square edit-btn"></i>
                                         </button>
-                                        <button>
-                                            <i className="fa-solid fa-trash edit-btn"></i>
+                                        <button 
+                                        onClick={() => deleteFromUserList(index)}>
+                                            <i className="fa-solid fa-trash delete-btn"></i>
                                         </button>
                                     </div>
                                 </td>
