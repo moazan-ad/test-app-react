@@ -1,7 +1,7 @@
 #user-table-section{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding-top:4rem;
     align-items: center;
     min-height: 100vh;
     min-width: 100%;
@@ -42,12 +42,18 @@
   color: #c2e9e0;
 }
 
+#user-table tr button:hover i{
+  scale: 1.2;
+  transition: all 0.3s ease;
+} 
+
 #user-table tr button i,
 #user-table tr button
 {
   background-color: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 #user-table tr button i.delete-btn{

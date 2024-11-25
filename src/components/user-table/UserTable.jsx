@@ -2,8 +2,18 @@
 
 import './userTable.css'
 
-const UserTable = ({ userList, handleToggleComponents }) => {
-    
+const UserTable = ({ 
+    userList,
+    handleToggleComponents,
+    setEditUserData,
+    deleteFromUserList
+ }) => {
+
+    const handleEditToggle = (user,index) => {
+        setEditUserData({...user,index: index});
+        handleToggleComponents('user-edit-form');
+        
+    }
 
     return(
         <section id="user-table-section">
@@ -29,11 +39,12 @@ const UserTable = ({ userList, handleToggleComponents }) => {
                                 <td>{user.age}</td>
                                 <td>
                                     <div className='action-btns'>
-                                        <button>
-                                            <i className="fa-solid fa-pen-to-square delete-btn"></i>
+                                        <button onClick={() => handleEditToggle(user, index)}>
+                                            <i className="fa-solid fa-pen-to-square edit-btn"></i>
                                         </button>
-                                        <button>
-                                            <i className="fa-solid fa-trash edit-btn"></i>
+                                        <button 
+                                        onClick={() => deleteFromUserList(index)}>
+                                            <i className="fa-solid fa-trash delete-btn"></i>
                                         </button>
                                     </div>
                                 </td>
