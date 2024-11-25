@@ -1,42 +1,28 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
-import UserForm from './components/user-form/UserForm'
+import UserForm from './components/user-form/UserForm';
 import UserTable from './components/user-table/UserTable'; 
-import UserEditForm from './components/user-edit-form/UserEditForm'
 
 function App() {
   
   const [userList, setUserList] = useState([]);
   const [toggleComponents, setToggleComponents] = useState('user-form');
-  const [editUserData,setEditUserData] = useState({
+  const [user, setUser] = useState({
+    id: '',
     name: '',
-    age:'',
-    index: ''
-  })
+    age: ''
+  });
+
+  const [isEditing, setIsEditing] = useState(false);
 
 
-  useEffect(()=>{
-    console.log(userList)
-  }, [userList])
-
-  const handleToggleComponents = (componentName) => {
-    setToggleComponents(componentName);
-  }
 
   const addToUserList = ({user}) => {
-    setUserList(prev => [...prev, user])
+    const {name,age} = user;
+    setUserList(prev => [...prev, {name,age}]);
   }
-
-  const editUserList = (user) => {
-    setUserList( prev => {
-      const {name,age,index} = user;
-      const tempUserList = [...prev];
-      tempUserList[index] = {name,age};
-      return tempUserList;
-    }) 
-  }
-
+  
   const deleteFromUserList = (index) => {
     setUserList(prev => {
       const temp = [];
@@ -55,24 +41,30 @@ function App() {
 
   }
 
-
+  const handleToggleComponents = (componentName) => {
+    setToggleComponents(componentName);
+  }
 
   return (
     <main>
       
       {
         toggleComponents === "user-form" ? 
-          <UserForm handleToggleComponents={handleToggleComponents} 
-            addToUserList={addToUserList} /> :
+          <UserForm
+            user={user} setUser={setUser} setUserList={setUserList}
+            handleToggleComponents={handleToggleComponents} 
+            addToUserList={addToUserList}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+          /> :
         toggleComponents === "user-table" ? 
-          <UserTable handleToggleComponents={handleToggleComponents}
-              userList={userList} setEditUserData={setEditUserData}
-              deleteFromUserList={deleteFromUserList}/> : 
-        toggleComponents === "user-edit-form" ? 
-              <UserEditForm editUserList={editUserList} 
-                setEditUserData={setEditUserData}
-                editUserData={editUserData}
-                handleToggleComponents={handleToggleComponents}/> : null
+          <UserTable 
+              handleToggleComponents={handleToggleComponents}
+              userList={userList}
+              setUser={setUser}
+              deleteFromUserList={deleteFromUserList}
+              setIsEditing={setIsEditing}
+          /> : null
       }
 
     </main>

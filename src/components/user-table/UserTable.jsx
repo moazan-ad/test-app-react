@@ -5,20 +5,28 @@ import './userTable.css'
 const UserTable = ({ 
     userList,
     handleToggleComponents,
-    setEditUserData,
-    deleteFromUserList
+    setUser,
+    deleteFromUserList,
+    setIsEditing
  }) => {
 
     const handleEditToggle = (user,index) => {
-        setEditUserData({...user,index: index});
-        handleToggleComponents('user-edit-form');
-        
+        setUser({...user,index: index});
+        setIsEditing(true);
+        handleToggleComponents('user-form'); 
+    }
+
+    const handleToggle = () => {
+        setUser({name: '',age:'',id:''});
+        setIsEditing(false);
+        handleToggleComponents('user-form');
     }
 
     return(
         <section id="user-table-section">
             <div className='table-header'>
-                <button className='primary-btn add-user-data-btn' onClick={() => handleToggleComponents('user-form')}>
+                <button className='primary-btn add-user-data-btn' 
+                onClick={handleToggle}>
                     Add Data
                 </button>
             </div>
