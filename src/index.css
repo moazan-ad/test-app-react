@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
 
+
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +16,7 @@ body {
   font-family: 'Quicksand', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(#303b37, #1a1f1d);
+  background: linear-gradient(135deg,#623A2E, #1F181F);
   color: #e1eeeb;
   min-height: 100vh;
   display: grid;
@@ -26,16 +27,6 @@ body {
   font-size: 1.2rem;
 }
 
-@media only screen and (max-width: 600px) {
-    .title{
-      font-size: 1rem!important ;
-    }
-    .btn{
-     font-size: 0.7rem!important;
-
-    }
-}
-
 .center {
   text-align: center;
 }
@@ -43,16 +34,17 @@ body {
 .btn{
   padding: 0.5rem 0.7rem;
   font-size: 0.8rem;
-  border-radius: 5px;
-  scale: 1;
+  border-radius: 6px;
   transition: all 0.5s ease;
-  box-shadow: 0.5px 0.5px 1px rgb(97, 97, 97);
+  box-shadow: 0px 3px 4px 1px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+
 }
 .btn:hover{
   cursor: pointer;
-}
-.btn:active{
-  scale: 0.7;
 }
 
 .btn-group{
@@ -62,34 +54,28 @@ body {
 }
 
 .primary-btn{
-  color: #277863;
+  color: #3A0905;
+  background: linear-gradient(180deg,#FF9B40,#3A0905);
+  
   border: none;
 }
 
-.primary-btn:hover{
-  background: #00a67a;
-  color: rgb(232, 232, 232);
+.primary-btn:hover{  
+  color: #fffbf9;
+
 }
 
 .secondary-btn{
-  background-color: #89959f;
-  color: #c3cad3;
+  background-color: #23191a;
+  color: #ae9690;
   border: none;
 }
 
-.secondary-btn:hover{
-  background-color: #6c757d;
-  color: #b0b4b8;
+.secondary-btn:hover{  
+  background-color: #372425;
+  color: #856c65;
+  
 }
-
-
-.error{
-  font-size: 0.7rem;
-  color: rgb(202, 38, 38);
-  margin: 1rem 0rem;
-  font-weight: 600;
-}
-
 
 
 
@@ -102,8 +88,17 @@ body {
   background: #6b6b6b;
 }
 
-
 ::-webkit-scrollbar-track{
   background: #e6e6e6;
 }
 
+@media only screen and (max-width: 600px) {
+    .title{
+      font-size: 1rem!important ;
+    }
+    .btn{
+      font-size: 0.7rem!important;
+      box-shadow: 0px 1.5px 2px 0.5px black;
+    }
+
+}

@@ -14,6 +14,8 @@ const UserForm = ({
 
     }) => {
     
+
+   
         
     const editUserList = (user) => {
         setUserList(prev => {
@@ -26,25 +28,41 @@ const UserForm = ({
 
     const [error,setError] = useState({
         set: false,
+        errorField: '',
         message: ''
     });
 
     const handleUserInput = (e) => {
         e.preventDefault();
         const {name, value} = e.target;
+        if(value){
+            setError({
+                set: false,
+                errorField: '',
+                message: ""
+            });
+        }
         setUser( prev => ({...prev,[name]: value}))
     }
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        if(user.name.length > 0 && user.age > 0){
-            if (isEditing) editUserList(user);
-            else addToUserList({user});
-            setUser({ name: '', age: '', id: '' });
-            handleToggleComponents('user-table');
-            return;
-        }
-        setError({set:true,message: "'Name' and 'Age' should be valid value."})
+        if (user.name.length <= 0)
+            return setError({ 
+                            set: true,
+                            errorField: 'name', 
+                            message: "Name should be valid." 
+                        });
+        else if (user.age <= 0)
+            return setError({ 
+                            set: true,
+                            errorField: 'age',
+                            message: "'Age' should be a valid value." });
+
+        if (isEditing) editUserList(user);
+        else addToUserList({user});
+        setUser({ name: '', age: '', id: '' });
+        handleToggleComponents('user-table');
     }
 
     const handleToggle = () => {
@@ -63,31 +81,25 @@ const UserForm = ({
                     <form id='user-form' onSubmit={handleOnSubmit}>
                         <Input title={"Name"} id={"name"} 
                             value={user.name} onChange={handleUserInput}
+                            error={error}
                         />
                         <Input title={"Age"} id={"age"} type='number'
                             value={user.age} onChange={handleUserInput}
+                            error={error}
                         />
                         <div className='btn-group'>
-                            {/* button to scroll to table section */}
                             <button className='btn secondary-btn'
                                 onClick={handleToggle}>
                                 User Table
                             </button>
-                            <button type='submit' className='btn primary-btn'>
+                            <button type='submit' className='btn primary-btn edit-update-btn'>
                                 {
                                     isEditing ? "Update" : "Add"
                                 }
                             </button>
                         </div>
-                        {
-                            error.set && 
-                                <div className='error'>
-                                    {error.message}
-                                </div>
-                        }
                     </form>
                 </div>
-                <div className="card-footer"></div>
             </div>
         </section>
     );

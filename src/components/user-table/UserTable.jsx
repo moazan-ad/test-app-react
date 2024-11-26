@@ -24,43 +24,44 @@ const UserTable = ({
 
     return(
         <section id="user-table-section">
-            <div className='table-header'>
-                <button className='primary-btn add-user-data-btn' 
-                onClick={handleToggle}>
-                    Add Data
-                </button>
+            <div id='user-table-card'>
+                <table id="user-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+
+                            userList.map((user, index) =>
+                                <tr key={`${index}`}>
+                                    <td>{user.name}</td>
+                                    <td>{user.age}</td>
+                                    <td>
+                                        <div className='action-btns'>
+                                            <button title='Edit' onClick={() => handleEditToggle(user, index)}>
+                                                <i className="fa-solid fa-pen-to-square edit-btn"></i>
+                                            </button>
+                                            <button title='Delete'
+                                                onClick={() => deleteFromUserList(index)}>
+                                                <i className="fa-solid fa-trash delete-btn"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+
             </div>
-            <table id="user-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                         
-                        userList.map((user,index) => 
-                            <tr key={`${index}`}>
-                                <td>{user.name}</td>
-                                <td>{user.age}</td>
-                                <td>
-                                    <div className='action-btns'>
-                                        <button onClick={() => handleEditToggle(user, index)}>
-                                            <i className="fa-solid fa-pen-to-square edit-btn"></i>
-                                        </button>
-                                        <button 
-                                        onClick={() => deleteFromUserList(index)}>
-                                            <i className="fa-solid fa-trash delete-btn"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ) 
-                    }
-                </tbody>
-            </table>
+            <button title='Add User Data' className='btn add-user-data-btn'
+                onClick={handleToggle}>
+                New User
+            </button>
         </section>
     );
 }
